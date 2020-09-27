@@ -51,3 +51,9 @@ Private Apis
 > Note: if BY_PASS_AUTH env variable is false,
 > than you also have to pass authentication token received in admin/login api.
 > In 'Authorization' header as 'Bearer {{token}}'
+
+### 4. To Test apis
+> Api file parkingManager.postman_collection.json
+> Environment file dev.postman_environment.json
+
+Import the Post man collection json file and environment file to test.

@@ -1,0 +1,264 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Parking",
+		"_postman_id": "e5a2a11f-9970-40cd-078f-347a815218e7",
+		"description": "Parking lot apis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authenticate",
+			"request": {
+				"url": "{{domain}}:{{port}}/admin/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "admin",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "To become parking manager"
+			},
+			"response": []
+		},
+		{
+			"name": "Create parking lot",
+			"request": {
+				"url": "{{domain}}:{{port}}/parkingmanager/createparking",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "lotsize",
+							"value": "10",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "create parking lot with provided size"
+			},
+			"response": []
+		},
+		{
+			"name": "Park car",
+			"request": {
+				"url": "{{domain}}:{{port}}/park",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "vehnumber",
+							"value": "MH12MU9151",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "create parking lot with provided size"
+			},
+			"response": []
+		},
+		{
+			"name": "unPark",
+			"request": {
+				"url": "{{domain}}:{{port}}/unpark",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "vehnumber",
+							"value": "MH12MU9151",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "create parking lot with provided size"
+			},
+			"response": []
+		},
+		{
+			"name": "Set maintaince status",
+			"request": {
+				"url": "{{domain}}:{{port}}/parkingmanager/maintainancestatus",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "slotidlist",
+							"value": "[1,2,3]",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "true",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "create parking lot with provided size"
+			},
+			"response": []
+		},
+		{
+			"name": "To get Parking status",
+			"request": {
+				"url": "{{domain}}:{{port}}/parkingmanager/parkingstatus",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "create parking lot with provided size"
+			},
+			"response": []
+		},
+		{
+			"name": "To get Parking Details",
+			"request": {
+				"url": "{{domain}}:{{port}}/parkingmanager/parkingdetails",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "create parking lot with provided size"
+			},
+			"response": []
+		},
+		{
+			"name": "To get Parking Daily Stats",
+			"request": {
+				"url": "{{domain}}:{{port}}/parkingmanager/parkingdetails",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "create parking lot with provided size"
+			},
+			"response": []
+		}
+	]
+}
