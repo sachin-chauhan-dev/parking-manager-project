@@ -9,10 +9,10 @@ const ParkingManagerController = () => {
     const {username, password} = req.body;
 
     if (!username || !password) {
-      return res.status(400).json({msg: 'Bad Request: Username or password is wrong'});
+      return res.status(400).json({ msg: 'Bad Request: Username or password is wrong' });
     }
     try {
-      if (username === 'admin' && password === 'admin') {
+      if (username === process.env.PARKING_MANAGER_USERNAME && password === process.env.PARKING_MANAGER_PASSWORD) {
         const token = authService().issue({username});
         res.cookie('token', token, {httpOnly: true});
         return res.status(200).json({token, username});

@@ -4,6 +4,10 @@ const JWTService = require('../services/auth.service');
 module.exports = (req, res, next) => {
   let tokenToVerify;
 
+  if (process.env.BY_PASS_AUTH === 'true') {
+    return next();
+  }
+
   if (req.header('Authorization')) {
     const parts = req.header('Authorization').split(' ');
 

@@ -1,6 +1,6 @@
 {
   "name": "parking-manager",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Sachin Chauhan <sachin10184@gmail.com>",
   "license": "",
   "repository": {
@@ -9,15 +9,14 @@
   },
   "homepage": "",
   "scripts": {
-    "prestart": "npm run drop-sqlite-db || true",
     "start": "npm run nodemon",
-    "poststart": "npm run create-sqlite-db",
     "dev": "cross-env NODE_ENV=development node ./api/api.js",
     "nodemon": "nodemon --exec npm run dev",
     "create-sqlite-db": "shx touch ./db/database.sqlite",
     "drop-sqlite-db": "shx rm ./db/database.sqlite",
     "lint": "eslint ./api/. ./config/.",
-    "production": "cross-env NODE_ENV=production node ./api/api.js"
+    "production": "cross-env NODE_ENV=production node ./api/api.js",
+    "migrate": "cross-env NODE_ENV=development node ./scripts/migration.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
