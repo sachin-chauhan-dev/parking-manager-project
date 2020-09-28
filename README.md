@@ -19,6 +19,8 @@ export DB_HOST='localhost'
 > BY_PASS_AUTH should be true in case you don't want to use jwt token for authorization 
 
 ```sh
+$ git clone git@github.com:sachin-chauhan-dev/parking-manager-project.git
+$ cd parking-manager-project
 $ npm install
 $ source env-variables.sh 
 $ npm run create-sqlite-db
@@ -45,12 +47,13 @@ Private Apis
 - 'POST /createparking' data:{lotsize}
 - 'POST /maintainancestatus' data:{slotidlist, status:true|false}
 
-> Note: if BY_PASS_AUTH env variable is false,
+> **Note**: if BY_PASS_AUTH env variable is false,
 > than you also have to pass authentication token received in admin/login api.
 > In 'Authorization' header as 'Bearer {{token}}'
 
 ### 4. To Test apis
-> Api file parkingManager.postman_collection.json
-> Environment file dev.postman_environment.json
+> Api file `parkingManager.postman_collection.json`
+> Environment file `dev.postman_environment.json`
 
 Import the Post man collection json file and environment file to test.
+> **Note**: Set your `token` environment variable with the token received from admin/login api.

@@ -38,11 +38,11 @@ const VehicleController = () => {
       });
 
       console.log('inserted ', inserted);
-      return res.status(200).json({ success: true });
+      return res.status(200).json({ success: true, slotIdAssigned: availableSlotId });
     } catch (err) {
       console.error('error ', err);
       if (availableSlotId) {
-        ParkingSlots.update({occupied: false,}, {where: {id: availableSlotId}})
+        ParkingSlots.update({occupied: false }, {where: { id: availableSlotId } });
       }
       return res.status(500).json({msg: 'Internal server error'});
     }
