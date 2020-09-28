@@ -26,6 +26,12 @@ const server = http.Server(app);
 const mappedOpenRoutes = mapRoutes(config.publicRoutes, 'api/controllers/');
 const mappedAuthRoutes = mapRoutes(config.privateRoutes, 'api/controllers/');
 const DB = dbService(environment, config.migrate).start();
+const morgan = require('morgan');
+const uniqueRequestId = require('./services/uuid.service');
+
+morgan.token('id', (req) => req.id);
+app.use(uniqueRequestId);
+app.use(morgan(':id :method :url :response-time'));
 
 // allow cross origin requests
 // configure to only allow requests from certain origins
