@@ -35,17 +35,17 @@ $ npm run drop-sqlite-db && npm run create-sqlite-db
 ### 3. Available Apis
  
 Public Apis
-- 'POST /admin/login'  data: {username, password}
-- 'POST /park'         data: {vehnumber}
-- 'POST /unpark'       data: {vehnumber}
+- 'POST /admin/login'  data: {username: String, password: String}
+- 'POST /park'         data: {vehnumber: String}
+- 'POST /unpark'       data: {vehnumber: String}
 
 
 Private Apis
-- 'GET /parkingdetails'  data:{}
-- 'GET /parkingstatus'   data:{}
-- 'GET /parkingstats'    data:{}
-- 'POST /createparking' data:{lotsize}
-- 'POST /maintainancestatus' data:{slotidlist, status:true|false}
+- 'GET /parkingmanager/parkingdetails'  data:{}
+- 'GET /parkingmanager/parkingstatus'   data:{}
+- 'GET /parkingmanager/parkingstats'    data:{}
+- 'POST /parkingmanager/createparking'  data:{lotsize: Number}
+- 'POST /parkingmanager/maintainancestatus' data:{slotidlist: Array, status:true|false}
 
 > **Note**: if BY_PASS_AUTH env variable is false,
 > than you also have to pass authentication token received in admin/login api.
