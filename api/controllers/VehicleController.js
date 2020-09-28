@@ -11,11 +11,11 @@ const VehicleController = () => {
     }
     try {
       const vehParkingDetails = await ParkingDetails.findAll({
-        where: {vehNumber: vehnumber, outTime: null},
+        where: { vehNumber: vehnumber, outTime: null },
       });
 
       if (vehParkingDetails.length) {
-        return res.status(400).json({msg: `This ${vehnumber} vehicle is already parked`});
+        return res.status(400).json({ msg: `This ${vehnumber} vehicle is already parked` });
       }
 
       availableSlotId = await ParkingSlots.min('id', {
@@ -25,7 +25,7 @@ const VehicleController = () => {
       console.log('Available Slot id', availableSlotId);
 
       if (!availableSlotId) {
-        return res.status(200).json({msg: 'No slot available'});
+        return res.status(200).json({ msg: 'No slot available' });
       }
 
       await ParkingSlots.update({occupied: true,}, {where: {id: availableSlotId}});
@@ -34,10 +34,11 @@ const VehicleController = () => {
         vehNumber: vehnumber,
         parkingSlotId: availableSlotId,
         inTime: Date.now(),
+        inDate: Date.now(),
       });
 
       console.log('inserted ', inserted);
-      return res.status(200).json({success: true, inserted});
+      return res.status(200).json({ success: true });
     } catch (err) {
       console.error('error ', err);
       if (availableSlotId) {
@@ -74,9 +75,9 @@ const VehicleController = () => {
         fees: totalFees,
       }, { where: { id: details.id } });
 
-      await ParkingSlots.update({occupied: false}, {where: {id: details.parkingSlotId}});
+      await ParkingSlots.update({ occupied: false }, { where: { id: details.parkingSlotId } });
 
-      return res.status(200).json({success: true, totalTime, totalFees});
+      return res.status(200).json({ success: true, totalTimeInHrs, totalFees });
     } catch (err) {
       console.error('error ', err);
       return res.status(500).json({msg: 'Internal server error'});

@@ -6,7 +6,7 @@ const authService = require('../services/auth.service');
 const ParkingManagerController = () => {
 
   const login = async (req, res) => {
-    const {username, password} = req.body;
+    const { username, password } = req.body;
 
     if (!username || !password) {
       return res.status(400).json({ msg: 'Bad Request: Username or password is wrong' });
@@ -26,9 +26,9 @@ const ParkingManagerController = () => {
   };
 
   const createParking = async (req, res) => {
-    const {lotsize} = req.body;
+    const { lotsize } = req.body;
     if (!lotsize) {
-      return res.status(400).json({msg: 'Bad Request: lot size is not provided'});
+      return res.status(400).json({ msg: 'Bad Request: lot size is not provided' });
     }
     try {
       const slotList = [];
@@ -38,30 +38,30 @@ const ParkingManagerController = () => {
           occupied: false,
         });
       }
-      await ParkingSlots.bulkCreate(slotList, { validate: false});
-      const slots = await ParkingSlots.findAll({ attributes:['id', 'slotNumber'] });
+      await ParkingSlots.bulkCreate(slotList, { validate: false });
+      const slots = await ParkingSlots.findAll({ attributes: ['id', 'slotNumber'] });
 
-      return res.status(200).json({slots});
+      return res.status(200).json({ success: true, slots });
     } catch (err) {
       console.log(err);
-      return res.status(500).json({msg: 'Internal server error'});
+      return res.status(500).json({ msg: 'Internal server error' });
     }
   };
 
   const getParkingStatus = async (req, res) => {
     try {
-      const slots = await ParkingSlots.findAll({ attributes:['id', 'slotNumber', 'occupied', 'underMaintenance'] });
-      return res.status(200).json({slots});
+      const slots = await ParkingSlots.findAll({ attributes: ['id', 'slotNumber', 'occupied', 'underMaintenance'] });
+      return res.status(200).json({ success: true, slots });
     } catch (err) {
       console.log(err);
-      return res.status(500).json({msg: 'Internal server error'});
+      return res.status(500).json({ msg: 'Internal server error' });
     }
   };
 
   const getParkingDetails = async (req, res) => {
     try {
-      const details = await ParkingDetails.findAll( { attributes:['vehNumber', 'inTime', 'outTime', 'totalTime', 'fees', 'parkingSlotId']} );
-      return res.status(200).json({details});
+      const details = await ParkingDetails.findAll( { attributes:['vehNumber', 'inTime', 'outTime', 'totalTime', 'fees', 'inDate', 'parkingSlotId']} );
+      return res.status(200).json({success: true, details});
     } catch (err) {
       console.log(err);
       return res.status(500).json({msg: 'Internal server error'});
@@ -86,10 +86,13 @@ const ParkingManagerController = () => {
   const getParkingDailyStats = async (req, res) => {
     try {
       const stats = await ParkingDetails.findAll({
-        attributes: [[Sequelize.fn('COUNT', Sequelize.col('id')), 'total_vehicle'],
+        attributes: [
+          ['inDate', 'date'],
+          [Sequelize.fn('COUNT', Sequelize.col('id')), 'total_vehicle'],
           [Sequelize.fn('SUM', Sequelize.col('totalTime')), 'total_time'],
-          [Sequelize.fn('SUM', Sequelize.col('fees')), 'total_fees']],
-        group: [Sequelize.fn('datetime', 'start of day', Sequelize.col('createdAt'))],
+          [Sequelize.fn('SUM', Sequelize.col('fees')), 'total_fees']
+        ],
+        group: ['inDate'],
       });
       return res.status(200).json({ success: true, stats });
     } catch (err) {

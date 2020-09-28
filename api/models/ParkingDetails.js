@@ -24,6 +24,10 @@ const ParkingDetails = sequelize.define('ParkingDetails', {
     defaultValue: 0,
     allowNull: false,
   },
+  inDate: {
+    type: Sequelize.DATEONLY,
+    allowNull: false,
+  },
   parkingSlotId: {
     type: Sequelize.INTEGER,
   },

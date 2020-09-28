@@ -22,15 +22,12 @@ export DB_HOST='localhost'
 $ npm install
 $ source env-variables.sh 
 $ npm run create-sqlite-db
-$ npm run migrate
 $ npm start
 ```
 
 ### 2. To reset DB
 ```sh
-$ npm run drop-sqlite-db
-$ npm run create-sqlite-db
-$ npm run migrate
+$ npm run drop-sqlite-db && npm run create-sqlite-db
 ```
 
 ### 3. Available Apis
